@@ -1,0 +1,50 @@
+W silniku gry RPG szansa na unik zależy od zręczności postaci oraz wagi jej ekwipunku. Należy zaimplementować funkcję o nazwie check_dodge, która decyduje, czy postać uniknęła ataku.
+
+Funkcja przyjmuje dwa parametry:
+
+agility (liczba całkowita) - punkty zręczności.
+weight (liczba zmiennoprzecinkowa) - obciążenie ekwipunku.
+Wzór na Współczynnik Uniku jest następujący: agility - weight.
+
+Funkcja ma zwrócić wartość true, jeśli Współczynnik Uniku jest większy lub równy 10.0. W przeciwnym razie zwraca false.
+
+W funkcji głównej należy wczytać dane i w zależności od wyniku funkcji wypisać komunikat: DODGE (dla true) lub HIT (dla false).
+
+Format wejścia:
+
+Liczba całkowita (zręczność), a następnie liczba zmiennoprzecinkowa (waga).
+Format wyjścia:
+
+Słowo DODGE lub HIT.
+
+#include <stdio.h>
+
+//Funkcja sprawdzajaca, czy postac uniknela ataku
+int check_dodge(int agility, float weight)
+    {
+    float check_dodge = agility - weight; //wzor: zrecznosc - waga
+    if (check_dodge>= 10.0) {
+        return 1;   //unik udany = true
+    } else
+    {
+        return 0;   //unik nieudany = false
+    }
+}
+
+int main()
+{
+    int agility;
+    float weight;
+    //Wczytanie danych
+    scanf("%d %f", &agility, &weight);
+    //Sprawdzenie wyniku
+    if (check_dodge(agility, weight))
+    {
+        printf("DODGE\n");
+    } else
+    {
+        printf("HIT\n");
+    }
+
+    return 0;
+}
