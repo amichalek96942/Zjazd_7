@@ -1,0 +1,42 @@
+Zadanie (0.10 pkt)
+W telekomunikacji stosuje się sumy kontrolne do weryfikacji poprawności przesłanych pakietów danych. Najprostszym algorytmem jest zsumowanie wszystkich cyfr identyfikatora pakietu.
+
+Należy zdefiniować funkcję calculate_checksum, która przyjmuje nieujemną liczbę całkowitą (ID pakietu) i zwraca sumę jej cyfr.
+
+Przykład działania:
+
+Dla liczby 123 wynik to 1 + 2 + 3 = 6.
+Dla liczby 4005 wynik to 4 + 0 + 0 + 5 = 9.
+W funkcji głównej należy wczytać ID pakietu i wypisać obliczoną sumę kontrolną.
+
+Format wejścia:
+
+Jedna nieujemna liczba całkowita.
+Format wyjścia:
+
+Liczba całkowita będąca sumą cyfr.
+
+
+#include <stdio.h>
+
+// Funkcja obliczająca sumę cyfr liczby
+int calculate_checksum(int id) {
+    int suma = 0;
+
+    while (id > 0) {
+        suma = suma + (id % 10); // dodaj ostatnią cyfrę
+        id = id / 10;            // usuń ostatnią cyfrę
+    }
+
+    return suma;
+}
+
+int main() {
+    int packet_id;
+    scanf("%d", &packet_id);   // wczytujemy ID pakietu
+
+    int checksum = calculate_checksum(packet_id); // obliczamy sumę cyfr
+    printf("%d\n", checksum);                     // wypisujemy wynik
+
+    return 0;
+}
