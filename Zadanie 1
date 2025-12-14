@@ -1,0 +1,41 @@
+W systemach wbudowanych (IoT) czujniki analogowe często zwracają zaszumione wartości wykraczające poza oczekiwany zakres. Należy napisać funkcję o nazwie normalize_input, która sprowadzi odczyt do bezpiecznego przedziału 8-bitowego (0-255).
+
+Funkcja przyjmuje jeden parametr:
+
+raw_value (liczba całkowita) - surowy odczyt z czujnika.
+Logika działania funkcji (tzw. clamping):
+
+Jeśli raw_value jest mniejsza niż 0, funkcja zwraca 0.
+Jeśli raw_value jest większa niż 255, funkcja zwraca 255.
+W pozostałych przypadkach zwraca wartość niezmienioną.
+W funkcji głównej należy pobrać liczbę całkowitą, przepuścić ją przez funkcję normalizującą i wypisać wynik.
+
+Format wejścia:
+
+Jedna liczba całkowita (może być ujemna, zerowa lub bardzo duża).
+Format wyjścia:
+
+Jedna liczba całkowita z przedziału [0, 255].
+
+#include <stdio.h>
+
+// Funkcja normalizująca odczyt do zakresu 0-255
+int normalize_input(int raw_value) {
+    if (raw_value < 0) {
+        return 0;           // jeśli poniżej 0, zwróć 0
+    } else if (raw_value > 255) {
+        return 255;         // jeśli powyżej 255, zwróć 255
+    } else {
+        return raw_value;   // w przeciwnym razie zwróć wartość niezmienioną
+    }
+}
+
+int main() {
+    int raw_value;
+    scanf("%d", &raw_value);   // wczytujemy surowy odczyt
+
+    int safe_value = normalize_input(raw_value); // normalizacja
+    printf("%d\n", safe_value);                  // wypisujemy wynik
+
+    return 0;
+}
