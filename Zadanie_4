@@ -1,0 +1,41 @@
+W automatyce przemysłowej sterowniki często komunikują stan systemu za pomocą prostych kodów literowych. Należy napisać funkcję get_status_code, która na podstawie odczytu ciśnienia (liczba zmiennoprzecinkowa) zwraca odpowiedni znak kategorii (typ char).
+
+Zasady klasyfikacji są następujące:
+
+Dla wartości ujemnych: zwróć znak 'E' (Error).
+Dla wartości od 0.0 do 25.0 (włącznie z 0, ale poniżej 25): zwróć znak 'L' (Low).
+Dla wartości od 25.0 do 75.0 (włącznie z 25, ale poniżej 75): zwróć znak 'O' (Optimal).
+Dla wartości 75.0 i wyższych: zwróć znak 'H' (High).
+W funkcji głównej należy wczytać wartość ciśnienia, wywołać funkcję i wypisać otrzymany kod.
+
+Format wejścia:
+
+Jedna liczba zmiennoprzecinkowa (typ float).
+Format wyjścia:
+
+Pojedynczy znak statusu ('E', 'L', 'O' lub 'H').
+
+#include <stdio.h>
+
+// Funkcja zwracająca kod statusu na podstawie ciśnienia
+char get_status_code(float pressure) {
+    if (pressure < 0.0) {
+        return 'E';   // Error
+    } else if (pressure < 25.0) {
+        return 'L';   // Low
+    } else if (pressure < 75.0) {
+        return 'O';   // Optimal
+    } else {
+        return 'H';   // High
+    }
+}
+
+int main() {
+    float pressure;
+    scanf("%f", &pressure);   // wczytujemy wartość ciśnienia
+
+    char status = get_status_code(pressure); // wywołanie funkcji
+    printf("%c\n", status);                  // wypisanie kodu
+
+    return 0;
+}
