@@ -1,0 +1,79 @@
+Zadanie (0.10 pkt)
+W aplikacjach konsolowych często stosuje się tekstowe paski postępu. Należy zaimplementować funkcję typu void o nazwie draw_progress_bar, która wizualizuje stan ładowania programu.
+
+Funkcja przyjmuje jeden parametr:
+
+percent (liczba całkowita z zakresu 0-100).
+Zasada rysowania:
+
+Pasek składa się łącznie z 10 znaków zamkniętych w nawiasach kwadratowych [].
+Każde pełne 10% to jeden znak #.
+Pozostałe miejsce wypełniane jest kropkami ..
+Przykładowo dla 50%: [#####.....]. Dla 7%: [..........] (bo mniej niż 10%).
+
+W funkcji głównej należy wczytać procent i wywołać funkcję rysującą.
+
+Format wejścia:
+
+Jedna liczba całkowita (0-100).
+Format wyjścia:
+
+Ciąg znaków reprezentujący pasek postępu.
+
+
+
+#include <stdio.h>
+
+void draw_progress_bar(int percent);
+
+int main() {
+
+    int procent = 0;
+
+    scanf("%d", &procent);
+
+    draw_progress_bar(procent);
+
+    return 0;
+}
+
+
+void draw_progress_bar(int percent)
+{
+    switch (percent / 10)
+    {
+    case 10:
+        printf("[##########]\n");
+        break;
+    case 9:
+        printf("[#########.]\n");
+        break;
+    case 8:
+        printf("[########..]\n");
+        break;
+    case 7:
+        printf("[#######...]\n");
+        break;
+    case 6:
+        printf("[######....]\n");
+        break;
+    case 5:
+        printf("[#####.....]\n");
+        break;
+    case 4:
+        printf("[####......]\n");
+        break;
+    case 3:
+        printf("[###.......]\n");
+        break;
+    case 2:
+        printf("[##........]\n");
+        break;
+    case 1:
+        printf("[#.........]\n");
+        break;
+    default:
+        printf("[..........]\n");
+        return;
+    }
+}
