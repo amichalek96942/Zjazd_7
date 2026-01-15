@@ -1,0 +1,55 @@
+Zadanie (0.10 pkt)
+Palindrom to słowo brzmiące tak samo czytane od lewej i od prawej strony. Należy napisać funkcję is_palindrome, która sprawdza, czy podany ciąg znaków jest palindromem, ignorując wielkość liter.
+
+Funkcja przyjmuje jeden parametr typu string i zwraca wartość bool.
+
+Wymagania algorytmiczne:
+
+Należy porównywać znaki z początku i końca ciągu, zbliżając się do środka.
+Przed porównaniem znaki należy sprowadzić do wspólnej wielkości (np. małe litery) używając funkcji tolower z biblioteki <cctype>.
+W funkcji głównej wczytujemy słowo i wypisujemy YES lub NO.
+
+Format wejścia:
+
+Jeden ciąg znaków (bez spacji).
+Format wyjścia:
+
+Słowo YES jeśli tekst jest palindromem, w przeciwnym razie NO.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+bool is_palindrome(char text[], int dlugosc) {
+    int left = 0;
+    int right = dlugosc - 1;
+
+    while (left < right) {
+        // Porównuj znaki z początku i końca, ignorując wielkość liter
+        if (tolower(text[left]) != tolower(text[right])) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+
+    return true;
+}
+
+int main() {
+    char slowo[1001];
+
+    scanf("%s", slowo);
+
+    int dlugosc = strlen(slowo);
+
+    if (is_palindrome(slowo, dlugosc)) {
+        printf("YES\n");
+    } else {
+        printf("NO\n");
+    }
+
+    return 0;
+}
