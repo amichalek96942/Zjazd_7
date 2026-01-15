@@ -1,0 +1,77 @@
+Zadanie (0.10 pkt)
+W kodzie źródłowym i wyrażeniach matematycznych kluczowa jest poprawność nawiasów. Należy napisać funkcję calculate_max_depth, która analizuje ciąg złożony wyłącznie ze znaków ( oraz ).
+
+Funkcja powinna zwrócić:
+
+Maksymalną głębokość zagnieżdżenia, jeśli ciąg jest poprawny.
+Wartość -1, jeśli ciąg jest niepoprawny (np. zamknięto nawias przed otwarciem lub liczba otwarć i zamknięć się nie zgadza).
+Przykłady:
+
+(( )) → Poprawny, głębokość 2.
+(()(())) → Poprawny, głębokość 3.
+()) → Błąd (nadmiarowe zamknięcie), wynik -1.
+(() → Błąd (niezamknięty nawias), wynik -1.
+Funkcja przyjmuje jeden parametr typu string. W funkcji głównej należy wczytać ciąg i wypisać wynik.
+
+Format wejścia:
+
+Jeden ciąg znaków bez spacji.
+Format wyjścia:
+
+Liczba całkowita (maksymalna głębokość lub -1).
+
+
+#include <stdio.h>
+#include <string.h>
+
+int calculate_max_depth (char string[], int dlugosc);
+
+int main() {
+
+    char string[50]="";
+
+    scanf("%s", string);
+
+    int dlugosc = strlen(string);
+
+    printf("%d", calculate_max_depth(string, dlugosc));
+
+
+
+
+    return 0;
+}
+
+int calculate_max_depth (char string[], int dlugosc)
+{
+    int aktualna = 0;
+    int maksymalna = 0;
+
+    for (int i = 0; i < dlugosc; i++)
+    {
+        if (string[i] == '(')
+        {
+            aktualna++;
+            if (aktualna > maksymalna)
+            {
+                maksymalna = aktualna;
+            }
+        }
+        else if (string[i] == ')')
+        {
+            aktualna--;
+            if (aktualna < 0)  // nadmiarowe zamknięcie
+            {
+                return -1;
+            }
+        }
+    }
+
+    // Sprawdź czy wszystkie nawiasy zostały zamknięte
+    if (aktualna != 0)
+    {
+        return -1;
+    }
+
+    return maksymalna;
+}
