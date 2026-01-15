@@ -1,0 +1,69 @@
+Zadanie (0.10 pkt)
+Adresy pamięci i kody kolorów są często zapisywane w systemie szesnastkowym (heksadecymalnym). Należy napisać funkcję hex_to_dec, która przelicza podany ciąg znaków z systemu szesnastkowego na system dziesiętny.
+
+Funkcja przyjmuje parametr typu string (maksymalnie 7 znaków, aby wynik zmieścił się w typie int).
+
+Wymagania implementacyjne:
+
+Należy obsłużyć cyfry '0'-'9'.
+Należy obsłużyć litery 'A'-'F' oraz małe 'a'-'f' (gdzie A=10, B=11, ..., F=15).
+Należy zastosować algorytm przeliczania systemu pozycyjnego (np. schemat Hornera).
+Przykład: Dla wejścia "1A" wynik to 1 * 16 + 10 = 26.
+
+W funkcji głównej należy wczytać kod hex i wypisać jego wartość dziesiętną.
+
+Format wejścia:
+
+Jeden ciąg znaków (poprawny zapis szesnastkowy).
+Format wyjścia:
+
+Liczba całkowita w systemie dziesiętnym.
+
+
+#include <stdio.h>
+#include <string.h>
+
+int hex_to_dec(char hex[], int dlugosc);
+
+int main() {
+    char hex[8] = "";  // max 7 znaków + '\0'
+    
+    scanf("%s", hex);
+    
+    int dlugosc = strlen(hex);
+    
+    printf("%d\n", hex_to_dec(hex, dlugosc));
+    
+    return 0;
+}
+
+int hex_to_dec(char hex[], int dlugosc)
+{
+    int wynik = 0;
+    
+    for (int i = 0; i < dlugosc; i++)
+    {
+        int wartosc_znaku = 0;
+        
+        // Cyfry '0' - '9'
+        if (hex[i] >= '0' && hex[i] <= '9')
+        {
+            wartosc_znaku = hex[i] - '0';
+        }
+        // Duże litery 'A' - 'F'
+        else if (hex[i] >= 'A' && hex[i] <= 'F')
+        {
+            wartosc_znaku = hex[i] - 'A' + 10;
+        }
+        // Małe litery 'a' - 'f'
+        else if (hex[i] >= 'a' && hex[i] <= 'f')
+        {
+            wartosc_znaku = hex[i] - 'a' + 10;
+        }
+        
+        // Schemat Hornera:  wynik = wynik * 16 + nowa_cyfra
+        wynik = wynik * 16 + wartosc_znaku;
+    }
+    
+    return wynik;
+}
