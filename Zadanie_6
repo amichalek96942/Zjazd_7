@@ -1,0 +1,56 @@
+Zadanie (0.10 pkt)
+Problem Collatza to zagadnienie, w którym dowolna liczba naturalna ostatecznie wpada w pętlę 4-2-1. Należy napisać funkcję count_collatz_steps, która symuluje ten proces i zlicza liczbę kroków potrzebnych do osiągnięcia wartości 1.
+
+Funkcja przyjmuje liczbę całkowitą n. Algorytm postępuje według zasad:
+
+Jeśli liczba jest parzysta: podziel ją przez 2.
+Jeśli liczba jest nieparzysta: pomnóż ją przez 3 i dodaj 1.
+Powtarzaj kroki, aż liczba osiągnie wartość 1.
+Funkcja ma zwrócić liczbę wykonanych operacji (kroków). Dla n=1 wynik to 0.
+
+W funkcji głównej wczytujemy liczbę i wypisujemy liczbę kroków.
+
+Format wejścia:
+
+Jedna dodatnia liczba całkowita.
+Format wyjścia:
+
+Liczba całkowita oznaczająca ilość kroków.
+
+
+#include <stdio.h>
+
+int count_collatz_steps(int n);
+
+int main() {
+
+    int liczba = 0;
+
+    scanf("%d", &liczba);
+
+    printf("%d", count_collatz_steps(liczba));
+
+    return 0;
+}
+
+
+int count_collatz_steps(int n)
+{
+    int steps = 0;
+
+    if (n == 1) return steps;
+
+    while (n != 1)
+    {
+        if (n % 2 == 0)
+        {
+            n = n / 2;
+            steps++;
+        } else
+        {
+            n = (n * 3) + 1;
+            steps++;
+        }
+    }
+    return steps;
+}
